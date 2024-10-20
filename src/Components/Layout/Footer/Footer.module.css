@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pacifico&display=swap');
+
+:root {
+    --primary-color: #708090;
+    --secondary-color: #B0C4DE;
+    --background-color: #f5f5f5;
+}
+
+footer {
+    font-family: "Montserrat", sans-serif;
+    background: var(--background-color);
+}

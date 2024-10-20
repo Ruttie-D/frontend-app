@@ -1,0 +1,15 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-family: 'Pacifico', cursive;
+}
+
+.textBox {
+    box-sizing: border-box;
+    padding: 0 !important;
+    width: 50vw !important;
+}

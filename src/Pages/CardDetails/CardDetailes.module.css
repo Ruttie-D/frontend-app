@@ -1,0 +1,11 @@
+:root {
+    --primary-color: #708090;
+    --secondary-color: #B0C4DE;
+    --background-color: #f5f5f5;
+    --primary-font: 'Montserrat', sans-serif;
+    --secondary-font: 'Pacifico', cursive;
+}
+
+h2 {
+    font-family: var(--primary-font);
+}
