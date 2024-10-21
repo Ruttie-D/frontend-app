@@ -90,8 +90,10 @@ const Favorites = () => {
             <div className="flex flex-row flex-wrap justify-between w-5/6 gap-1 m-auto mt-6 text-center">
                 {searchCards()!.map((item: TCard) => {
                     return (
-                        <Card key={item._id} className="xl:w-[24%] lg:w-[32%] md:w-[40%] sm:w-[60%] sm:m-auto mb-3 relative">
-                            <div onClick={() => { navToCard(item._id) }}>
+                        <Card key={item._id}
+                            className="xl:w-[24%] lg:w-[32%] md:w-[40%] sm:w-[60%] w-[80%] m-auto mb-3 relative">
+                            <div onClick={() => { navToCard(item._id) }}
+                            >
                                 <img className="w-[95%] h-56 object-cover absolute inset-x-0 top-2 mx-auto p-1"
                                     src={item.image.url}
                                     alt={item.image.alt}

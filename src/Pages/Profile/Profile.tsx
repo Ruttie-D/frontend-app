@@ -127,7 +127,7 @@ const Profile = () => {
                     )}
 
                     <Button
-                        className="w-1/3 m-auto mt-5"
+                        className="w-1/3 m-auto mt-5 btn dark:bg-[var(--primary-color)] dark:text-white"
                         onClick={editProfile}
                     >
                         Edit Your Profile

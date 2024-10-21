@@ -12,8 +12,6 @@ type TRoutGuardProps = {
 const RoutGuard = (props: TRoutGuardProps) => {
     const { user, publicOnly } = props;
 
-    console.log("Current User:", user);  // Check if user is null or populated
-
     // If user is not logged in and it's not a public-only route, redirect to login
     if (!publicOnly && !user) {
         return <Navigate to="/login" />;

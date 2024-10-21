@@ -247,7 +247,13 @@ function CreateCard() {
                     </div>
                 </div>
 
-                <Button type="submit" disabled={!isValid}>Create</Button>
+                <Button
+                    className="btn dark:bg-[var(--primary-color)] dark:text-white"
+                    type="submit"
+                    disabled={!isValid}
+                >
+                    Create
+                </Button>
             </form>
         </div>
     );

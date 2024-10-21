@@ -9,3 +9,25 @@
     --primary-font: 'Montserrat', sans-serif;
     --secondary-font: 'Pacifico', cursive;
 }
+
+/* Override Flowbite button styles */
+.btn {
+    background-color: var(--secondary-color); /* Replace with your desired button color */
+    color: var(--primary-color); /* Replace with your desired text color */
+}
+
+.btn:hover {
+    @apply dark:bg-[var(--background-color)];
+    background-color: var(--primary-color); /* Replace with your desired button color */
+    color: var(--background-color);
+}
+
+.btn.dark{
+    background-color: var(--primary-color) !important; /* Replace with your desired button color */
+}
+
+/* Override Flowbite active navigation styles */
+.nav-active {
+    background-color: #your-custom-active-color; /* Replace with your desired active nav color */
+    color: #your-custom-active-text-color; /* Replace with your desired active text color */
+}

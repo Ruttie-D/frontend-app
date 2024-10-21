@@ -254,7 +254,13 @@ function Register() {
                     <Label htmlFor="isBusiness" className="-mt-[0.2rem]">Is Business</Label>
                 </div>
 
-                <Button type="submit" disabled={!isValid}>Register</Button>
+                <Button
+                    className="btn dark:bg-[var(--primary-color)] dark:text-white w-1/4 m-auto"
+                    type="submit"
+                    disabled={!isValid}
+                >
+                    Register
+                </Button>
             </FormWrapper>
         </PageFormContainer>
 

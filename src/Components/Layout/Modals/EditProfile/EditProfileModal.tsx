@@ -48,8 +48,6 @@ const EditProfileModal = ({ user, isOpen, onClose }: EditProfileModalProps) => {
     });
 
     const onUpdate = async (form: typeof initialData) => {
-        console.log(form);
-        console.log("Updating");
 
         try {
             const token = localStorage.getItem('token');
@@ -273,6 +271,7 @@ const EditProfileModal = ({ user, isOpen, onClose }: EditProfileModalProps) => {
                     </div>
 
                     <Button
+                        className="btn dark:bg-[var(--primary-color)] dark:text-white"
                         type="submit"
                         disabled={!isValid}
                     >

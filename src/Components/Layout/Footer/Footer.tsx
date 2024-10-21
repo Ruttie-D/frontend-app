@@ -14,12 +14,16 @@ const Footer = () => {
     }, [])
 
     return (
-        <footer className={`${Styles.footer} h-12 fixed bottom-0 left-0 z-20 w-full md:flex md:items-center md:justify-between md:p-6 dark:bg-[#1f2937]`}>
+        <footer
+            className={`px-4 ${Styles.footer} h-16 lg:h-12 fixed bottom-0 left-0 z-20 w-full md:flex md:items-center md:justify-between md:p-6 dark:bg-[#1f2937]`}
+        >
             <span className="text-sm text-gray-500 sm:text-center dark:text-white">
                 &copy; {thisYear?.getFullYear()} <a href="#" className="hover:underline">Nexaurio</a>. All Rights Reserved.
             </span>
 
-            <FBFooter.LinkGroup className='flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0'>
+            <FBFooter.LinkGroup
+                className='flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0'
+            >
                 <FBFooter.Link href="/about" className='hover:underline me-4 md:me-6'>About</FBFooter.Link>
 
                 {user &&

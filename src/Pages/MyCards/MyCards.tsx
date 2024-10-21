@@ -24,7 +24,6 @@ const MyCards = () => {
     const user = useSelector((state: TRootState) => state.UserSlice);
     const [cards, setCards] = useState<TCard[]>([]);
     const nav = useNavigate();
-    const inOut = localStorage.getItem('logged in') ? true : false;
     const searchWord = useSelector((state: TRootState) => state.SearchSlice.search);
 
     const [selectedCard, setSelectedCard] = useState<TCard | null>(null);
@@ -130,7 +129,9 @@ const MyCards = () => {
             <div className="flex flex-row flex-wrap justify-between w-5/6 gap-1 m-auto mt-6 text-center">
                 {searchCards()!.map((item: TCard) => {
                     return (
-                        <Card key={item._id} className="xl:w-[24%] lg:w-[32%] md:w-[40%] sm:w-[60%] sm:m-auto mb-3 relative">
+                        <Card key={item._id}
+                            className="xl:w-[24%] lg:w-[32%] md:w-[40%] sm:w-[60%] w-[80%] m-auto mb-3 relative"
+                        >
                             <div onClick={() => { navToCard(item._id) }}>
                                 <img className="w-[95%] h-56 object-cover absolute inset-x-0 top-2 mx-auto p-1"
                                     src={item.image.url}
@@ -155,21 +156,20 @@ const MyCards = () => {
 
                             <hr className='leading-[1.75] text-black dark:text-white' />
 
-                            <div className={`flex ${inOut ? 'justify-between' : 'justify-center'} flex-row`}>
+                            <div className={`flex justify-between flex-row`}>
 
-                                {inOut &&
-                                    (isCardLiked(item) ?
-                                        <BsSuitHeartFill
-                                            className={`text-2xl cursor-pointer text-red-500 fill-current`}
-                                            onClick={() => likeUnlike(item)}
-                                            title='Unlike'
-                                        /> :
-                                        <BsSuitHeart
-                                            className={`text-2xl cursor-pointer text-black dark:text-white`}
-                                            onClick={() => likeUnlike(item)}
-                                            title='Like'
-                                        />
-                                    )}
+                                {(isCardLiked(item) ?
+                                    <BsSuitHeartFill
+                                        className={`text-2xl cursor-pointer text-red-500 fill-current`}
+                                        onClick={() => likeUnlike(item)}
+                                        title='Unlike'
+                                    /> :
+                                    <BsSuitHeart
+                                        className={`text-2xl cursor-pointer text-black dark:text-white`}
+                                        onClick={() => likeUnlike(item)}
+                                        title='Like'
+                                    />
+                                )}
 
                                 <TbEdit
                                     className='text-2xl cursor-pointer dark:text-white'
@@ -189,7 +189,7 @@ const MyCards = () => {
                 })
                 }
             </div>
-            <div className='fixed bottom-16 right-5'>
+            <div className='fixed bottom-20 right-5'>
                 <TbSquarePlus2
                     className='sticky text-5xl cursor-pointer dark:text-white'
                     onClick={() => nav('/CreateCard')}

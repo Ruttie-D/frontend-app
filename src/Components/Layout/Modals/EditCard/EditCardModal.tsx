@@ -48,7 +48,6 @@ const EditCardModal = ({ card, isOpen, onClose }: EditCardModalProps) => {
     });
 
     const onUpdate = async (form: typeof initialData) => {
-        console.log("Updating");
 
         try {
             const token = localStorage.getItem('token');
@@ -262,6 +261,7 @@ const EditCardModal = ({ card, isOpen, onClose }: EditCardModalProps) => {
                     </div>
 
                     <Button
+                        className="btn dark:bg-[var(--primary-color)] dark:text-white"
                         type="submit"
                         disabled={!isValid}
                     >

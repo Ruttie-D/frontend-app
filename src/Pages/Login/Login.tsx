@@ -82,7 +82,12 @@ function Login() {
                 />
                 <span className="-mt-4 text-sm text-red-500">{errors.password?.message}</span>
 
-                <Button type="submit" disabled={!isValid} className="mt-5">Login</Button>
+                <Button
+                    type="submit"
+                    disabled={!isValid}
+                    className="mt-5 btn dark:bg-[var(--primary-color)] dark:text-white"
+                >
+                    Login</Button>
             </FormWrapper>
         </PageFormContainer>
     );

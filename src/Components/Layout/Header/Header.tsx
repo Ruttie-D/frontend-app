@@ -29,13 +29,13 @@ const Header = () => {
         <Navbar fluid className='bg-[var(--secondary-color)] py-4 dark:bg-[#1f2937] '>
             <Navbar.Brand >
                 <h1
-                    className={`${Styles.headline} text-[var(--primary-color)] self-center text-xl font-semibold whitespace-nowrap dark:text-[var(--secondary-color)]`}
+                    className={`${Styles.headline} text-[var(--primary-color)] self-center text-3xl lg:text-4xl font-semibold whitespace-nowrap dark:text-[var(--secondary-color)]`}
                 >
                     Business Cards
                 </h1>
             </Navbar.Brand>
             <Navbar.Toggle />
-            <Navbar.Collapse className="font-[var(--primary-font)]">
+            <Navbar.Collapse>
                 <div className="flex flex-row justify-around gap-5 pt-2 text-lg">
                     <Navbar.Link
                         as={Link}
@@ -55,13 +55,14 @@ const Header = () => {
                     </Navbar.Link>
                 </div>
 
-                <Navbar.Brand>
+                <div className="flex flex-row justify-between gap-3"><Navbar.Brand>
                     <DarkThemeToggle />
                 </Navbar.Brand>
 
-                <Navbar.Brand className="md:w-11 lg:w-56">
-                    <TextInput rightIcon={CiSearch} onChange={search} />
-                </Navbar.Brand>
+                    <Navbar.Brand className="md:w-11 lg:w-56">
+                        <TextInput rightIcon={CiSearch} onChange={search} />
+                    </Navbar.Brand>
+                </div>
 
                 <div className="flex flex-row justify-around gap-5 pt-2 pr-3 text-lg">
                     {!user && <Navbar.Link
