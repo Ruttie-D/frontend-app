@@ -1,30 +1,50 @@
-# React + TypeScript + Vite
+<h1 align="center" id="title">Bussines Cards App</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center"><img src="" alt="project-image"></p>
 
-Currently, two official plugins are available:
+<p id="description">On the platform you can create an account for yourself or for your bussines view bissunes card from everywhere liked them and reach out to the people behined them. Excellent apportunity to premote your own bussines create as many card as you need and manage them in the simplest way possible. Enjoy</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<h2>🚀 Demo</h2>
 
-## Expanding the ESLint configuration
+[https://ruttie-d.github.io/frontend-app/]( https://ruttie-d.github.io/frontend-app/)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+  
+  
+<h2>🧐 Features</h2>
 
-- Configure the top-level `parserOptions` property like this:
+Here're some of the project's best features:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: ["./tsconfig.json", "./tsconfig.node.json"],
-    tsconfigRootDir: __dirname,
-  },
-};
+*   Easy interaction
+*   Dispaly all the information you need
+*   Integrates with API
+*   Fully functional on mobile and desktop devices
+*   Clean and intuitive interface designed for ease of use
+*   Users can adjust and edit at will
+*   Uses local storage for data management
+
+<h2>🛠️ Installation Steps:</h2>
+
+<p>1. Just install the node moules and off you go</p>
+
+```
+npm i
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+  
+  
+<h2>💻 Built with</h2>
+
+Technologies used in the project:
+
+*   Flowbite components
+*   Custom components
+*   Typescript & React
+*   regex
+*   joi validation
+*   Custon types
+*   Token services
+*   HOCs
+*   Modals
+*   Redux
+
+Copyright (c) [2024] [Ruttie]
