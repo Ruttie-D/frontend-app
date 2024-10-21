@@ -16,7 +16,8 @@ import { useSelector } from 'react-redux';
 import { TRootState } from '../../Store/BigPie';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import EditCardModal from '../../Components/Layout/EditCard/EditCardModal';
+import EditCardModal from '../../Components/Layout/Modals/EditCard/EditCardModal';
+import Title from '../../Components/Shared/Title';
 
 const MyCards = () => {
     const token = localStorage.getItem('token'); // Retrieve the token from local storage
@@ -124,6 +125,7 @@ const MyCards = () => {
     return (
         <PageContainer>
             <PageTitle>My Cards</PageTitle>
+            <Title className='text-[1.7rem] pb-3 text-center'>Take Control of Your Business Cards: Create, Modify, and Remove as You Wish</Title>
 
             <div className="flex flex-row flex-wrap justify-between w-5/6 gap-1 m-auto mt-6 text-center">
                 {searchCards()!.map((item: TCard) => {

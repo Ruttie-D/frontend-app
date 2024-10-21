@@ -1,14 +1,11 @@
+/* eslint-disable no-self-assign */
 /* eslint-disable tailwindcss/classnames-order */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { useEffect, useState } from 'react';
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import { useEffect, useRef, useState } from 'react';
 import Location404 from "../../../assets/location-not-found.svg";
 import 'leaflet/dist/leaflet.css';
-
-const containerStyle = {
-    width: '100%',
-    height: '100%'
-};
+import axios from 'axios';
 
 interface MapProps {
     state: string;
@@ -19,59 +16,86 @@ interface MapProps {
     // zip: number;
 }
 
-const OpenStreetMapComponent = (props: MapProps) => {
+const MapComponent = (props: MapProps) => {
     const { state, country, city, street, houseNumber } = props;
-    const [center, setCenter] = useState<{ lat: number; lng: number } | null>(null); // Change to null
+    const [center, setCenter] = useState({ lat: 32.0846427, lng: 34.8007944 });
+    const [markerPosition, setMarkerPosition] = useState<{ lat: number; lng: number } | null>(null);
     const [hasError, setHasError] = useState<boolean>(false);
+    const address = `${houseNumber} ${street}, ${city}, ${state}, ${country}`;
+    const mapRef = useRef<L.Map | null>(null);
 
     useEffect(() => {
-        const geocoder = async () => {
+        const getCoordinates = async () => {
             try {
-                const address = `${houseNumber} ${street}, ${city}, ${state}, ${country}`;
-                const response = await fetch(
-                    `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json`
-                );
-                const data = await response.json();
-                console.log(data);
+                const response = await axios.get(`https://geocode.maps.co/search?q=${address}&api_key=671671878502d090682293qby239f2d`, {
+                    params: {
+                        q: address,
+                        format: 'json',
+                    },
+                });
 
-                if (data.length > 0) {
-                    const location = data[0];
-                    setCenter({ lat: parseFloat(location.lat), lng: parseFloat(location.lon) });
-                    setHasError(false);
+                if (response.status === 200) {
+                    setHasError(false)
+                    console.log(response.data);
+
+                    const { lat, lon } = response.data[0]; // Destructure the values
+                    console.log(lat, typeof center.lat, hasError);
+                    console.log(lon, center.lng);
+                    setCenter({ lat: +lat, lng: +lon });
+                    if (mapRef.current) {
+                        mapRef.current.setView([lat, lon], 13); // Center the map on the new position
+                    }
+
                 } else {
-                    console.error('Geocoding failed: Address not found');
-                    setCenter(null); // Set to null on error
+                    console.error("No results found for the given address.");
                     setHasError(true);
                 }
             } catch (error) {
-                console.error('Error fetching geocoding data:', error);
-                setCenter(null); // Set to null on error
                 setHasError(true);
+                console.error("Error fetching coordinates:", error);
             }
         };
 
-        geocoder();
-    }, [state, country, city, street, houseNumber]);
+        getCoordinates();
+    }, [address]);
+
+    useEffect(() => {
+        setMarkerPosition({ lat: center.lat, lng: center.lng });
+        console.log(typeof markerPosition?.lat, hasError);
+
+    }, [center, hasError]);
 
     return (
-        <div className='h-[40vh] bg-black rounded-lg'>
+        <div
+            className='h-[40vh] bg-black rounded-lg'
+        >
             {hasError ? (
-                <img src={Location404} alt="Address not found " style={containerStyle} />
+                <img
+                    src={Location404}
+                    alt='Location not found'
+                    className='h-[40vh]'
+                />
             ) : (
-                center && ( // Only render the map if center is valid
-                    <MapContainer center={center} zoom={15} style={containerStyle}>
-                        <TileLayer
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        />
-                        <Marker position={center}>
-                            <Popup>{`${houseNumber} ${street}, ${city}, ${state}, ${country}`}</Popup>
-                        </Marker>
-                    </MapContainer>
-                )
+                <MapContainer
+                    className='z-10 h-full content-stretch'
+                    center={[center.lat, center.lng]}
+                    zoom={13}
+                    scrollWheelZoom={false}
+                    key={`${center.lat}${center.lng}`}
+                >
+                    <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    <Marker position={[center.lat, center.lng]}>
+                        <Popup>
+                            {center.lat}, {center.lng}
+                        </Popup>
+                    </Marker>
+                </MapContainer>
             )}
         </div>
     );
 }
 
-export default OpenStreetMapComponent;
+export default MapComponent;

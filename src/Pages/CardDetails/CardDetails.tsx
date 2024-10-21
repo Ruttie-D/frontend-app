@@ -10,7 +10,7 @@ import { TCard } from "../../Types/TCard";
 import noPic from "../../assets/noPic.png"
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import OpenStreetMapComponent from "../../Components/Layout/OpenStreetMap/OpenStreetMap";
+import MapComponent from "../../Components/Layout/OpenStreetMap/OpenStreetMap";
 // import { getCode } from 'country-list';
 
 const CardDetails = () => {
@@ -33,7 +33,7 @@ const CardDetails = () => {
             <PageTitle>Card Details</PageTitle>
 
             <div
-                className="flex h-full flex-col gap-2 p-4 mx-auto text-center rounded-lg shadow-lg md:w-2/3 sm:w-3/4 dark:bg-[#1f2937] mt-9 dark:text-[var(--background-color)]"
+                className="flex h-full flex-col gap-2 p-4 mx-auto text-center rounded-lg shadow-lg md:w-2/3 xs:w-3/4 dark:bg-[#1f2937] mt-9 dark:text-[var(--background-color)]"
             >
 
                 <h1 className="pt-5 mb-2 ml-4 text-6xl text-center text-[#708090]" style={{ WebkitTextStroke: '0.5px white' }}>
@@ -66,7 +66,7 @@ const CardDetails = () => {
                     Our Contact
                 </h1>
 
-                <p className='flex gap-6 text-xl lg:flex-row md:flex-col md:m-auto'>
+                <p className='flex flex-col gap-6 m-auto text-xl lg:flex-row'>
                     <span className="flex flex-row gap-3">
                         <MdEmail className="size-8" />
                         <h1 className="inline text-2xl underline">Email:</h1>
@@ -81,9 +81,9 @@ const CardDetails = () => {
 
                 <h1 className="inline mt-10 text-2xl underline">Address:</h1>
                 <div
-                    className='mb-3 text-xl text-center text-black bg-[var(--secondary-color)] rounded-lg shadow-lg w-3/4 m-auto p-5 flex lg:flex-row justify-around flex-col'
+                    className='gap-5 text-xl text-center bg-[var(--secondary-color)] rounded-lg shadow-lg w-3/4 m-auto p-5 flex lg:flex-row justify-around flex-col'
                 >
-                    <div className="flex flex-col justify-center w-1/3 bold">
+                    <div className="flex flex-col justify-center lg:w-1/3 bold">
                         <p>{card && card.address.state}</p>
                         <p>{card && card.address.country}</p>
                         <p>{card && card.address.city}</p>
@@ -91,8 +91,8 @@ const CardDetails = () => {
                         <p>{card && card.address.houseNumber}</p>
                         <p>{card && card.address.zip}</p>
                     </div>
-                    <div className="w-2/3">
-                        <OpenStreetMapComponent
+                    <div className="lg:w-2/3">
+                        <MapComponent
                             state={(card && card?.address.state) ?? ""}
                             country={card?.address.country ?? ""}
                             city={card?.address.city ?? ""}
