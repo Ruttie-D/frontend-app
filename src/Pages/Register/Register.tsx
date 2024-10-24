@@ -174,9 +174,13 @@ function Register() {
                     </div>
                 </div>
 
-                <h2 className="font-bold text-[var(--primary-color)] dark:text-[var(--background-color)] pt-2">Address:</h2>
-                <div className="flex flex-row justify-around gap-5 text-left">
-                    <div className="flex flex-col w-full">
+                <h2
+                    className="font-bold text-[var(--primary-color)] dark:text-[var(--background-color)] pt-2">
+                    Address:
+                </h2>
+
+                <div className="flex flex-row flex-wrap justify-around gap-2 text-left">
+                    <div className="flex flex-col w-1/5">
                         <FloatingLabel
                             className="dark:text-[var(--background-color)] dark:border-[var(--background-color)]"
                             type="text"
@@ -188,7 +192,7 @@ function Register() {
                         <span className="mb-5 text-xs text-red-500">{errors.address?.state?.message}</span>
                     </div>
 
-                    <div className="flex flex-col w-full">
+                    <div className="flex flex-col w-1/3">
                         <FloatingLabel
                             className="dark:text-[var(--background-color)] dark:border-[var(--background-color)]"
                             type="text"
@@ -200,7 +204,7 @@ function Register() {
                         <span className="mb-5 text-xs text-red-500">{errors.address?.country?.message}</span>
                     </div>
 
-                    <div className="flex flex-col w-full">
+                    <div className="flex flex-col w-1/3">
                         <FloatingLabel
                             className="dark:text-[var(--background-color)] dark:border-[var(--background-color)]"
                             type="text"
@@ -212,7 +216,7 @@ function Register() {
                         <span className="mb-5 text-xs text-red-500">{errors.address?.city?.message}</span>
                     </div>
 
-                    <div className="flex flex-col w-full">
+                    <div className="flex flex-col w-1/3">
                         <FloatingLabel
                             className="dark:text-[var(--background-color)] dark:border-[var(--background-color)]"
                             type="text"
@@ -224,7 +228,7 @@ function Register() {
                         <span className="mb-5 text-xs text-red-500">{errors.address?.street?.message}</span>
                     </div>
 
-                    <div className="flex flex-col w-1/4">
+                    <div className="flex flex-col w-1/5">
                         <FloatingLabel
                             className="dark:text-[var(--background-color)] dark:border-[var(--background-color)]"
                             type="number"
@@ -236,7 +240,7 @@ function Register() {
                         <span className="mb-5 text-xs text-red-500">{errors.address?.houseNumber?.message}</span>
                     </div>
 
-                    <div className="flex flex-col w-[35%]">
+                    <div className="flex flex-col w-1/5">
                         <FloatingLabel
                             className="dark:text-[var(--background-color)] dark:border-[var(--background-color)]"
                             type="number"

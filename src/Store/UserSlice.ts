@@ -16,14 +16,16 @@ const UserSlice = createSlice({
             // state.userName = (data.payload).userName;
             state.user = data.payload;
             state.isLoggedIn = true;
-            localStorage.setItem('user', JSON.stringify(data.payload));  // Persist user in localStorage
             localStorage.setItem('logged in', "true");
         },
         logout: (state: TUserState) => {
             state.user = null;
             state.isLoggedIn = false;
             localStorage.removeItem('logged in');
-            localStorage.removeItem('user');  // Remove persisted user
+            localStorage.removeItem("token");
+        },
+        updateUser: (state: TUserState, action: PayloadAction<TUser>) => {
+            state.user = action.payload;
         }
     }
 });

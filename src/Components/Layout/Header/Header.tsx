@@ -59,7 +59,7 @@ const Header = () => {
                     <DarkThemeToggle />
                 </Navbar.Brand>
 
-                    <Navbar.Brand className="md:w-11 lg:w-56">
+                    <Navbar.Brand className="w-16 md:w-32 lg:w-56">
                         <TextInput rightIcon={CiSearch} onChange={search} />
                     </Navbar.Brand>
                 </div>
@@ -81,6 +81,15 @@ const Header = () => {
                         active={location === '/register'}
                     >
                         Register
+                    </Navbar.Link>}
+
+                    {user?.isAdmin && <Navbar.Link
+                        as={Link}
+                        href="/CRM"
+                        to="/CRM"
+                        active={location === '/CRM'}
+                    >
+                        CRM
                     </Navbar.Link>}
 
                     {user?.isBusiness && <Navbar.Link
@@ -117,7 +126,6 @@ const Header = () => {
                         onClick={() => {
                             toast.success("Logout Successful");
                             dispatch(userActions.logout());
-                            localStorage.removeItem("token");
                         }}
                     >
                         <FiLogOut className="size-6" title="Logout" />

@@ -13,16 +13,11 @@ export const EditProfileSchema = Joi.object({
         .rule({ message: 'Please enter a valid phone number' })
         .required(),
     
-    email: Joi.string()
-        .ruleset.pattern(/^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/)
-        .rule({ message: 'Please enter a valid email address' })
-        .required(),
-
-    // password: Joi.string()
-    //     .ruleset.regex(/((?=.*\d{1})(?=.*[A-Z]{1})(?=.*[a-z]{1})(?=.*[!@#$%^&*-]{1}).{9,20})/,)
-    //     .rule({ message: 'Password mast be min 8 characters, an uppercase letter, a lowercase letter and a special character' })
+    // email: Joi.string()
+    //     .ruleset.pattern(/^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/)
+    //     .rule({ message: 'Please enter a valid email address' })
     //     .required(),
-    
+
     image: Joi.object()
         .keys({
             url: Joi.string().uri()

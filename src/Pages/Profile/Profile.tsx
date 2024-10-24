@@ -6,27 +6,39 @@ import PageContainer from "../../Components/Shared/PageContainer";
 import PageTitle from "../../Components/Shared/PageTitle";
 import { TRootState } from "../../Store/BigPie";
 import Title from "../../Components/Shared/Title";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { MdEmail, MdPhonelinkRing } from "react-icons/md";
 import { PiSignature } from "react-icons/pi";
 import { GrMapLocation, GrUserAdmin } from "react-icons/gr";
 import { ImBriefcase } from "react-icons/im";
 import { Button } from "flowbite-react";
-import EditProfileModal from "../../Components/Layout/Modals/EditProfile/EditProfileModal";
+import EditProfileModal from "../../Components/Layout/Modals/EditProfile/EditProfileModal.tsx";
+import { userActions } from "../../Store/UserSlice.ts";
 
 const Profile = () => {
+    const dispatch = useDispatch();
     const user = useSelector((state: TRootState) => state.UserSlice);
+    const userInfo = user.user;
+
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [triggerRender, setTriggerRender] = useState(true);
 
     const editProfile = () => {
-        // setSelectedCard(card);
         setIsModalOpen(true);
     }
 
     const handleCloseModal = () => {
+        setTriggerRender((prev) => !prev); // Toggle the trigger to force re-render
         setIsModalOpen(false); // Close the modal
     };
+
+    useEffect(() => {
+        console.log("User info updated:", userInfo); // Log user info
+        if (userInfo) {
+            dispatch(userActions.updateUser(userInfo)); // Dispatch with userInfo
+        }
+    }, [dispatch, triggerRender, userInfo]);
 
     return (
         <PageContainer>
@@ -44,8 +56,8 @@ const Profile = () => {
             <Title
                 className="text-[1.8rem] text-center"
             >
-                Welcome {(user.user?.name.first)
-                    ? user.user?.name.first?.charAt(0).toUpperCase() + user.user?.name.first?.slice(1)
+                Welcome {(userInfo?.name.first)
+                    ? userInfo?.name.first?.charAt(0).toUpperCase() + userInfo?.name.first?.slice(1)
                     : 'Guest'}
             </Title>
 
@@ -135,7 +147,7 @@ const Profile = () => {
                 </div>
             </div>
 
-            {isModalOpen && (
+            {isModalOpen && user.user && (
                 <EditProfileModal
                     user={user.user}
                     isOpen={isModalOpen}

@@ -42,7 +42,6 @@ function Login() {
             const id = decode(token.data)._id;
             axios.defaults.headers.common['x-auth-token'] = token.data;
             const user = await axios.get("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/" + id);
-            localStorage.setItem("userName", user.data.name.first as string);
 
             dispatch(userActions.login(user.data));
 

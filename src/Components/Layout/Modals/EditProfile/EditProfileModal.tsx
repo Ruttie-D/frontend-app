@@ -9,15 +9,18 @@ import { toast } from "react-toastify";
 import Title from "../../../Shared/Title";
 import { TUser } from "../../../../Types/TUser";
 import { EditProfileSchema } from "../../../../Validations/EditProfileSchema";
+import { useDispatch } from "react-redux";
+import { userActions } from "../../../../Store/UserSlice";
 
 interface EditProfileModalProps {
-    user: TUser | null;
+    user: TUser;
     isOpen: boolean;
     onClose: () => void; // Close the modal when the user clicks the close button or presses the escape key.
 }
 
 const EditProfileModal = ({ user, isOpen, onClose }: EditProfileModalProps) => {
     const selectedUser = user;
+    const dispatch = useDispatch();
 
     const initialData = {
         name: {
@@ -26,7 +29,7 @@ const EditProfileModal = ({ user, isOpen, onClose }: EditProfileModalProps) => {
             last: selectedUser?.name.last || "",
         },
         phone: selectedUser?.phone || "",
-        email: selectedUser?.email || "",
+        // email: selectedUser?.email || "",
         image: {
             url: selectedUser?.image.url,
             alt: selectedUser?.image.alt,
@@ -53,7 +56,7 @@ const EditProfileModal = ({ user, isOpen, onClose }: EditProfileModalProps) => {
             const token = localStorage.getItem('token');
 
             await axios.put(
-                'https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/' + user!._id,
+                `https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/${user?._id}`,
                 form,
                 {
                     headers: {
@@ -61,8 +64,13 @@ const EditProfileModal = ({ user, isOpen, onClose }: EditProfileModalProps) => {
                     }
                 }
             );
+            const updatedUserData = {
+                ...user,   // Spread the existing user data
+                ...form,   // Spread the updated form values, which will overwrite any matching keys from user
+            };
 
             toast.success('Profile Update Successfully');
+            dispatch(userActions.updateUser(updatedUserData));
             onClose();
         } catch (err: unknown) {
             // Type guard to check if 'err' is an AxiosError
@@ -130,8 +138,8 @@ const EditProfileModal = ({ user, isOpen, onClose }: EditProfileModalProps) => {
                         </div>
                     </div>
 
-                    <div className="flex flex-row justify-between gap-8 text-left">
-                        <div className="flex flex-col w-3/5">
+                    <div className="flex flex-row justify-around gap-8 text-left">
+                        <div className="flex flex-col w-1/4">
                             <FloatingLabel
                                 className="dark:text-[var(--background-color)] dark:border-[var(--background-color)]"
                                 type="tel"
@@ -142,30 +150,6 @@ const EditProfileModal = ({ user, isOpen, onClose }: EditProfileModalProps) => {
                             />
                             <span className="mb-5 text-xs text-red-500">{errors.phone?.message}</span>
                         </div>
-
-                        <div className="flex flex-col w-full">
-                            <FloatingLabel
-                                className="dark:text-[var(--background-color)] dark:border-[var(--background-color)]"
-                                type="email"
-                                variant="standard"
-                                label="Email *"
-                                {...register("email")}
-                                color={errors.email ? "error" : "success"}
-                            />
-                            <span className="mb-5 text-xs text-red-500">{errors.email?.message}</span>
-                        </div>
-
-                        {/* <div className="flex flex-col w-full">
-                            <FloatingLabel
-                                className="dark:text-[var(--background-color)] dark:border-[var(--background-color)]"
-                                type="password"
-                                variant="standard"
-                                label="Password *"
-                                {...register("password")}
-                                color={errors.password ? "error" : "success"}
-                            />
-                            <span className="mb-5 text-xs text-red-500">{errors.password?.message}</span>
-                        </div> */}
                     </div>
 
                     <div className="flex flex-row justify-around gap-12 text-left">
@@ -195,9 +179,12 @@ const EditProfileModal = ({ user, isOpen, onClose }: EditProfileModalProps) => {
                         </div>
                     </div>
 
-                    <h2 className="font-bold text-[var(--primary-color)] dark:text-[var(--background-color)] pt-2">Address:</h2>
-                    <div className="flex flex-row justify-around gap-5 mb-4 text-left">
-                        <div className="flex flex-col w-2/5">
+                    <h2 className="font-bold text-[var(--primary-color)] dark:text-[var(--background-color)] pt-2 mb-5">
+                        Address:
+                    </h2>
+
+                    <div className="flex flex-row flex-wrap justify-around gap-5 mb-4 text-left">
+                        <div className="flex flex-col w-1/5">
                             <FloatingLabel
                                 className="dark:text-[var(--background-color)] dark:border-[var(--background-color)]"
                                 type="text"
@@ -209,7 +196,7 @@ const EditProfileModal = ({ user, isOpen, onClose }: EditProfileModalProps) => {
                             <span className="mb-5 text-xs text-red-500">{errors.address?.state?.message}</span>
                         </div>
 
-                        <div className="flex flex-col w-3/5">
+                        <div className="flex flex-col w-1/5">
                             <FloatingLabel
                                 className="dark:text-[var(--background-color)] dark:border-[var(--background-color)]"
                                 type="text"
@@ -221,7 +208,7 @@ const EditProfileModal = ({ user, isOpen, onClose }: EditProfileModalProps) => {
                             <span className="mb-5 text-xs text-red-500">{errors.address?.country?.message}</span>
                         </div>
 
-                        <div className="flex flex-col w-2/3">
+                        <div className="flex flex-col w-2/5">
                             <FloatingLabel
                                 className="dark:text-[var(--background-color)] dark:border-[var(--background-color)]"
                                 type="text"
@@ -233,7 +220,7 @@ const EditProfileModal = ({ user, isOpen, onClose }: EditProfileModalProps) => {
                             <span className="mb-5 text-xs text-red-500">{errors.address?.city?.message}</span>
                         </div>
 
-                        <div className="flex flex-col w-3/5">
+                        <div className="flex flex-col w-2/5">
                             <FloatingLabel
                                 className="dark:text-[var(--background-color)] dark:border-[var(--background-color)]"
                                 type="text"
@@ -245,7 +232,7 @@ const EditProfileModal = ({ user, isOpen, onClose }: EditProfileModalProps) => {
                             <span className="mb-5 text-xs text-red-500">{errors.address?.street?.message}</span>
                         </div>
 
-                        <div className="flex flex-col w-1/4">
+                        <div className="flex flex-col w-1/5">
                             <FloatingLabel
                                 className="dark:text-[var(--background-color)] dark:border-[var(--background-color)]"
                                 type="number"
@@ -257,7 +244,7 @@ const EditProfileModal = ({ user, isOpen, onClose }: EditProfileModalProps) => {
                             <span className="mb-5 text-xs text-red-500">{errors.address?.houseNumber?.message}</span>
                         </div>
 
-                        <div className="flex flex-col w-[35%]">
+                        <div className="flex flex-col w-1/5">
                             <FloatingLabel
                                 className="dark:text-[var(--background-color)] dark:border-[var(--background-color)]"
                                 type="number"
