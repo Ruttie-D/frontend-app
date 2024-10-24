@@ -34,7 +34,7 @@ const Profile = () => {
     };
 
     useEffect(() => {
-        console.log("User info updated:", userInfo); // Log user info
+
         if (userInfo) {
             dispatch(userActions.updateUser(userInfo)); // Dispatch with userInfo
         }
