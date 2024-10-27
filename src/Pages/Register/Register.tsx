@@ -51,11 +51,10 @@ function Register() {
         console.log(form);
 
         try {
-            const token = await axios.post(
+            await axios.post(
                 "https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users",
                 form,
             );
-            console.log(token);
             toast.success("Register Successful");
             nav('/login');
         } catch (error) {
