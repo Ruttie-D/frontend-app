@@ -56,7 +56,6 @@ function CreateCard() {
             toast.success('Card Created Successfully');
             nav('/myCards');
         } catch (err) {
-            console.log(err);
             toast.error("Card Creation Failed");
         }
     }

@@ -48,7 +48,6 @@ function Register() {
     });
 
     const onSubmit = async (form: typeof initialData) => {
-        console.log(form);
 
         try {
             await axios.post(

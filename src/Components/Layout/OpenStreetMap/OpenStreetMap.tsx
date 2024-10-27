@@ -36,11 +36,8 @@ const MapComponent = (props: MapProps) => {
 
                 if (response.status === 200) {
                     setHasError(false)
-                    console.log(response.data);
 
                     const { lat, lon } = response.data[0]; // Destructure the values
-                    console.log(lat, typeof center.lat, hasError);
-                    console.log(lon, center.lng);
                     setCenter({ lat: +lat, lng: +lon });
                     if (mapRef.current) {
                         mapRef.current.setView([lat, lon], 13); // Center the map on the new position
@@ -61,8 +58,6 @@ const MapComponent = (props: MapProps) => {
 
     useEffect(() => {
         setMarkerPosition({ lat: center.lat, lng: center.lng });
-        console.log(typeof markerPosition?.lat, hasError);
-
     }, [center, hasError]);
 
     return (

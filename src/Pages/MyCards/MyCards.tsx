@@ -40,7 +40,6 @@ const MyCards = () => {
 
     const isCardLiked = (card: TCard) => {
         if (user && user.user) {
-            card.likes.includes(user.user?._id) ?? console.log(true);
             return card.likes.includes(user.user?._id);
         } else {
             return false;
@@ -48,7 +47,6 @@ const MyCards = () => {
     };
     const isCardMine = (card: TCard) => {
         if (user && user.user) {
-            card.user_id.includes(user.user?._id) ?? console.log(user.user._id, card.user_id);
             return card.user_id.includes(user.user?._id);
         } else {
             return false;

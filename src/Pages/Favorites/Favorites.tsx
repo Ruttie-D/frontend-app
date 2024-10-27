@@ -37,7 +37,6 @@ const Favorites = () => {
 
     const isCardLiked = (card: TCard) => {
         if (user && user.user) {
-            card.likes.includes(user.user?._id) ?? console.log(true);
             return card.likes.includes(user.user?._id);
         } else {
             return false;
